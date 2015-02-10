@@ -43,10 +43,10 @@ public class MainActivity extends Activity implements BluetoothAdapter.LeScanCal
     private Button scanButton;
     private TextView deviceInfoText;
     private TextView connectionStatusText;
+    private TextView receiveText;
     private Button connectButton;
-    private EditData valueEdit;
-    private Button sendZeroButton;
-    private Button sendValueButton;
+    private Button disconnectButton;
+
     private Button clearButton;
     private LinearLayout dataLayout;
 
@@ -152,36 +152,15 @@ public class MainActivity extends Activity implements BluetoothAdapter.LeScanCal
             }
         });
 
-        // Send
-        valueEdit = (EditData) findViewById(R.id.value);
-        valueEdit.setImeOptions(EditorInfo.IME_ACTION_SEND);
-        valueEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    sendValueButton.callOnClick();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        sendZeroButton = (Button) findViewById(R.id.sendZero);
-        sendZeroButton.setOnClickListener(new View.OnClickListener() {
+        disconnectButton = (Button) findViewById(R.id.disconnect);
+        disconnectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rfduinoService.send(new byte[]{0});
+            	
             }
         });
 
-        sendValueButton = (Button) findViewById(R.id.sendValue);
-        sendValueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rfduinoService.send(valueEdit.getData());
-            }
-        });
-
+        
         // Receive
         clearButton = (Button) findViewById(R.id.clearData);
         clearButton.setOnClickListener(new View.OnClickListener() {
@@ -192,6 +171,9 @@ public class MainActivity extends Activity implements BluetoothAdapter.LeScanCal
         });
 
         dataLayout = (LinearLayout) findViewById(R.id.dataLayout);
+        
+        // Show receive
+        receiveText = (TextView) findViewById(R.id.textView20);
     }
 
     @Override
@@ -265,14 +247,13 @@ public class MainActivity extends Activity implements BluetoothAdapter.LeScanCal
         }
         connectionStatusText.setText(connectionText);
         connectButton.setEnabled(bluetoothDevice != null && state == STATE_DISCONNECTED);
+        disconnectButton.setEnabled(bluetoothDevice != null && state == STATE_CONNECTED);
 
-        // Send
-        sendZeroButton.setEnabled(connected);
-        sendValueButton.setEnabled(connected);
     }
 
     private void addData(byte[] data) {
     	Log.i("RFDuino",HexAsciiHelper.bytesToHex(data));
+    	receiveText.setText(String.valueOf(data[0]));
     	/*
         View view = getLayoutInflater().inflate(android.R.layout.simple_list_item_2, dataLayout, false);
 

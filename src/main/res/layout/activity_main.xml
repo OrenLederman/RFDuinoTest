@@ -86,47 +86,19 @@
             android:layout_gravity="center_horizontal"
             android:enabled="false" />
 
-        <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
+        <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView5"
-            android:text="Send"
-            android:layout_marginTop="5dip" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Value:"
-            android:id="@+id/textView6" />
-
-        <view
-            class="com.lannbox.rfduinotest.EditData"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/value" />
-
+            android:text="Disconnect"
+            android:id="@+id/disconnect"
+            android:layout_gravity="center_horizontal"
+            android:enabled="false" />        
+        
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/sendButtons">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Send Zero"
-                android:id="@+id/sendZero"
-                android:layout_weight="1"
-                android:enabled="false" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Send Value"
-                android:id="@+id/sendValue"
-                android:layout_weight="1"
-                android:enabled="false" />
 
         </LinearLayout>
 
@@ -160,11 +132,21 @@
             android:text="Data:"
             android:id="@+id/textView8" />
 
-        <LinearLayout
+       <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/dataLayout"></LinearLayout>
+            android:id="@+id/dataLayout">
 
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/textView20"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:text="&lt;waiting for data>" />
+       
     </LinearLayout>
 </ScrollView>
