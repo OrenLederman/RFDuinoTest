@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -271,6 +272,8 @@ public class MainActivity extends Activity implements BluetoothAdapter.LeScanCal
     }
 
     private void addData(byte[] data) {
+    	Log.i("RFDuino",HexAsciiHelper.bytesToHex(data));
+    	/*
         View view = getLayoutInflater().inflate(android.R.layout.simple_list_item_2, dataLayout, false);
 
         TextView text1 = (TextView) view.findViewById(android.R.id.text1);
@@ -284,6 +287,7 @@ public class MainActivity extends Activity implements BluetoothAdapter.LeScanCal
 
         dataLayout.addView(
                 view, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+         */
     }
 
     @Override
